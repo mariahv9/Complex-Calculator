@@ -112,17 +112,48 @@ def pro_mat (m1, m2):
     m2 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
     SM = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
     matrix, matrix ---> matrix'''
-    pr = []
-    for i in range (len (m1)):
-        par = []
-        for j in range (len(m2)):
-            if len (m1 [i]) != len (m2):
-                print ('Este producto no es posible por dimensiones de las matrices')
-            else:
-                a = product (m1 [i][j], m2 [j][i])
-                par.append (a)
-        pr.append (par)
-    return (pr)   
+    if len (m1 [0]) == len (m2):
+         pro = []
+         for i in range (len (m1 [0])):
+              pro.append ([None] * len (m2))
+          for k in range (len (m1 [0])):
+               for j in range (len (m2)):
+                    add = (0,0)
+                    for l in range (len (m2 [0])):
+                         suma = addition (product (m1[k][l],m2 [l][j] ), add)
+def esc_mat (c, m):
+    '''c = (a, b) x
+    m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
+    M = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
+    tuple, matrix ---> matrix'''
+    pro = []
+    for i in range (len (m)):
+         pro.append (product (m [i]), c)
+     return pro
+
+def m_traspouse (m):
+     '''matrix ---> matrix'''
+     mat = []
+     for i in range (len (m[0])):
+          line = []
+          for j in range (len (m)):
+               line.append (m[j][i])
+          mat.append (line)
+     return mat
+
+def m_conjugate (m):
+     '''matrix ---> matrix'''
+     mat = []
+     for i in range (len (m)):
+          line = []
+          for j in range (len (m [0])):
+               line.append (conjugate (m[i][j]))
+          mat.append (line)
+     return mat
+
+def m_adjoint (m):
+     '''matrix ---> matrix'''
+     return m_conjugate (m_traspouse (m))
 
 #operaciones con vectores 
 def prod_vec (c, v):
