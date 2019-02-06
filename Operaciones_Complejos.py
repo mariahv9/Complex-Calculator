@@ -116,11 +116,12 @@ def pro_mat (m1, m2):
          pro = []
          for i in range (len (m1 [0])):
               pro.append ([None] * len (m2))
-          for k in range (len (m1 [0])):
-               for j in range (len (m2)):
-                    add = (0,0)
-                    for l in range (len (m2 [0])):
-                         suma = addition (product (m1[k][l],m2 [l][j] ), add)
+         for k in range (len (m1 [0])):
+              for j in range (len (m2)):
+                   add = (0,0)
+                   for l in range (len (m2 [0])):
+                        suma = addition (product (m1[k][l],m2 [l][j] ), add)
+
 def esc_mat (c, m):
     '''c = (a, b) x
     m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
@@ -129,7 +130,7 @@ def esc_mat (c, m):
     pro = []
     for i in range (len (m)):
          pro.append (product (m [i]), c)
-     return pro
+    return pro
 
 def m_traspouse (m):
      '''matrix ---> matrix'''
