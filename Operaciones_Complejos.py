@@ -1,6 +1,6 @@
 from sys import stdin
 import math 
-#operaciones complejos 
+#operaciones ecuaciones con complejos 
 def addition (c1, c2):
      '''c1 + c2 ---> z
      addition of tuples ---> tuple'''
@@ -72,6 +72,14 @@ def pol_car (c):
      z = (a, b)
      return z
 
+def inverse (c):
+     '''c ---> -c
+     tuple ---> tuple'''
+     x = -c[0]
+     y = -c[1]
+     z = (x, y)
+     return z
+     
 #operaciones matrices con complejos
 def ad_mat (m1, m2):
     '''m1 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] +
@@ -107,7 +115,7 @@ def sus_mat (m1, m2):
         su.append (par)
     return (su)                
 
-def pro_mat (m1, m2):
+def product_mat (m1, m2):
     '''m1 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] x
     m2 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
     SM = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
@@ -119,12 +127,12 @@ def pro_mat (m1, m2):
               for j in range (len (m2)):
                    add = (0,0)
                    for l in range (len (m2 [0])):
-                        add = addition (product(m1[k][l],m2 [l][j] ), add)
+                        add = addition (product(m1[l][k],m2 [j][l] ), add)
                    res.append(add)
               pro.append(res)
          return pro
 
-def esc_mat (c, m):
+def escale_mat (c, m):
     '''c = (a, b) x
     m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
     M = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
@@ -158,7 +166,9 @@ def m_adjoint (m):
      '''matrix ---> matrix'''
      return m_conjugate (m_traspouse (m))
 
-#operaciones con vectores 
+#([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]],[[(5,0),(2,-1),(6,-4)],[(0,0),(4,5),(2,0)],[(7,-4),(2,7),(0,0)]])
+
+#operaciones vectores con complejos 
 def prod_vec (c, v):
     '''c = (a1, b1) x v = [(c1, c2), (c1, c2),...,(c1, c2)]
     tuple x matrix ---> matrix'''
@@ -166,6 +176,7 @@ def prod_vec (c, v):
     for i in range (len (v)):
         pr.append(product (c, v [i]))
     return (pr)
+
 def ad_vec (v1, v2):
     '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)] +
     v2 = [(c1, c2), (c1, c2),...,(c1, c2)] =
@@ -193,3 +204,16 @@ def sus_vec (v1, v2):
                 a = substraction (v1[i], v2[i])
         par.append (a)
     return (par)
+
+def inv_vect (v):
+     '''v = [(c1, c2), (c1, c2),...,(c1, c2)]
+     vector ---> vector'''
+     inv = []
+     for i in range (len (v)):
+          inv.append (inverse (v[i]))
+     return inv
+
+#operaciones 
+
+
+
