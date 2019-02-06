@@ -5,6 +5,6 @@
 #### Producto: Se multiplican las tuplas ingresadas.
 #### Resta: Se restan las tuplas ingresadas.
 #### División: Se dividen las tuplas ingresadas.
-#### Conjugada: 
-#### Conversión cartesiano a polar:
-#### Conversión polar a cartesiano:
+#### Conjugada: Se obtiene la conjugada de la parte imaginaria.
+#### Conversión cartesiano a polar: Se obtiene la parte polar de la tupla ingresada.
+#### Conversión polar a cartesiano: Se obtiene la parte cartesiana de la tupa ingresada.
