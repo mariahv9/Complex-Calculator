@@ -14,7 +14,7 @@ The first part is composed for addition, subtraction, product, division, module,
     C1 = (a1, b1); C2 = (a2, b2)
 
 ADDITION: C1 + C2 = (a1 + a2, b1 + b2)
-SUSTRACTION: C1 - C2 = (a1 - a2, b1 - b2)
+SUBTRACTION: C1 - C2 = (a1 - a2, b1 - b2)
 PRODUCT: C1 + C2 = (a1a2 - b1b2, a1b2 + a2b1)
 DIVISION: C1 / C2 = (a1, b1) / (a2, b2)
 ```
@@ -28,13 +28,13 @@ The second part is composed for addition, subtraction, product, scalar, traspous
     m2 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
 
 ADDITION: M1 + M2 = M1 [j, k] + M2 [j, k]
-SUSTRACTION: M1 - M2 = M1 [j, k] - M2 [j, k]
+SUBTRACTION: M1 - M2 = M1 [j, k] - M2 [j, k]
 PRODUCT: (M1 x M2)[j, k] = SUMATORY (h=0, n-1)(M1 [j, h] x B [h, k])
 SCALAR: C1 ∙ M = C ∙ M [j, k]
 TRASPOUSE: M^T [j, k] = M [k, j]
 CONJUGATE: M` [j,k] = M [j,k]
 ADJOINT: M† [j, k] = M [k, j]
-INVERSE: M [i, j] = M [-i, -j]
+INVERSE: -M [i, j] = -(M [i, j])
 TRACE: Trace(M) = SUMATORY (n−1, i=0)(C[i, i ])
 IDENTITY: M [i, i] == (1, 0)
 EQUALS: M1 == M2
@@ -45,87 +45,38 @@ INNER PRODUCT: Trace(A† ⋆ B)
 ```
 ## Vectors with complex numbers
 
-The first part is composed for addition, subtraction, product, division, module, conjugate, conversion cartesian to polar and polar to cartesian.
+The first part is composed for addition, subtraction, product, inverse, conjugate, norm, equals, distance, inner product; on vectors.
 
 ```
-    C1 = (a1, b1); C2 = (a2, b2)
+    v1 = [(c1, c2), (c1, c2),...,(c1, c2)] 
+    v2 = [(c1, c2), (c1, c2),...,(c1, c2)]
 
-ADDITION: C1 + C2 = (a1 + a2, b1 + b2)
-SUSTRACTION: C1 - C2 = (a1 - a2, b1 - b2)
-PRODUCT: C1 + C2 = (a1a2 - b1b2, a1b2 + a2b1)
-DIVISION: C1 / C2 = (a1, b1) / (a2, b2)
+ADDITION: (V1 + V2) [i] = V1 [i] + V2 [i]
+SUBTRACTION: (V1 - V2) [i] = V1 [i] - V2 [i]
+PRODUCT: (C · V)[j] = C × V[j]
+INVERSE: (−V)[ j ] = −(V[ j ])
+CONJUGATE: 
+NORM: 
+EQUALS: V1 == V2
+DISTANCE: 
+INNER PRODUCT:
 ```
-
-
-
-
-## Prerequisites
-
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+pendienteee
 
-### Break down into end to end tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* Quantum Computer for Computer Scientist - (Noson S. Yanofsky, Mirco A. Mannucci)
 
-## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Maria Fernanda Hernandez Vargas** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
