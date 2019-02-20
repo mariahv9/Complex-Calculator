@@ -11,7 +11,8 @@ Each function read tuples (a, b), this represents a as real part and b as imagin
 The first part is composed for addition, subtraction, product, division, module, conjugate, conversion cartesian to polar and polar to cartesian.
 
 ```
-C1 = (a1, b1); C2 = (a2, b2)
+    C1 = (a1, b1); C2 = (a2, b2)
+
 ADDITION: C1 + C2 = (a1 + a2, b1 + b2)
 SUSTRACTION: C1 - C2 = (a1 - a2, b1 - b2)
 PRODUCT: C1 + C2 = (a1a2 - b1b2, a1b2 + a2b1)
