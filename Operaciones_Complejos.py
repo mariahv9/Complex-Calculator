@@ -22,9 +22,9 @@ def product (c1, c2):
      z = (x, y)
      return z
 
-def substraction (c1, c2):
+def subtraction (c1, c2):
      '''c1 - c2 ---> z
-     substraction of tuples ---> tuple'''
+     subtraction of tuples ---> tuple'''
      a1 = c1 [0]; a2 = c2 [0]
      b1 = c1 [1]; b2 = c2 [1]
      x = a1 - a2
@@ -100,7 +100,7 @@ def ad_mat (m1, m2):
         ad.append (par)
     return (ad)
 
-def m_sustraction (m1, m2):
+def m_subtraction (m1, m2):
     '''m1 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] -
     m2 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
     SM = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
@@ -112,7 +112,7 @@ def m_sustraction (m1, m2):
             if len (m1 [i]) != len (m2 [i]):
                 print ('Esta resta no es posible por dimensiones de las matrices')
             else:
-                a = substraction (m1 [i][j], m2 [i][j])
+                a = subtraction (m1 [i][j], m2 [i][j])
                 par.append (a)
         su.append (par)
     return (su)                
@@ -189,23 +189,31 @@ def m_trace (m):
           b = addition (b, m [i][i])
      return (b)
 
+def m_prod_intern (m1, m2):
+     m = m_product (m_adjoint (m1), m2)
+     return m_trace (m)
+
+def action_mat_vec (m, v):
+     if len (m[0]) != len (v):
+          print ('No es posible hacer la accion por las dimensiones vector-matriz')
+     else:
+          ac = (0, 0)
+          for i in range (len (v)):
+               for j in range (len (m[0])):
+                    ac = addition (ac, product (m[i][j], v[j]))
+          return ac
+     
+##
 def m_equal (m1, m2):
      '''m1 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
      m2 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
      matrix, matrix ---> boolean'''
+     if len (m1) != len (m2) or len (m1[0]) != len (m2[0]):
+          return False
      for i in range (len (m1)):
-          for j in range (len (m1 [0])):
-               if m1 [i][j] == m2 [i][j]:
-                    print (m1[i][j])
-                    return True
-               else: return False
-               
-def m_prod_intern (m1, m2):
-     return
-
-def action_mat_vec (m, v):
-     return
-
+          for j in range (len (m1[0])):return
+          
+##
 def m_hermitian (m):
      '''m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
      matrix ---> boolean'''
@@ -234,8 +242,6 @@ def m_unitary (m):
           mat_adj = m_product (m, m_adjoint (m))
      return m_identity (mat_adj)
 
-#[[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]
-#[[(5,0),(2,-1),(6,-4)],[(0,0),(4,5),(2,0)],[(7,-4),(2,7),(0,0)]]
 '---------------------------------------o---------------------------------------'
 #operaciones vectores con complejos 
 def prod_vec (c, v):
@@ -258,7 +264,7 @@ def ad_vec (v1, v2):
         par.append (a)
     return (par)
 
-def sus_vec (v1, v2):
+def sub_vec (v1, v2):
     '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)] -
     v2 = [(c1, c2), (c1, c2),...,(c1, c2)] =
     v = [(c1, c2), (c1, c2),...,(c1, c2)]'''
@@ -266,7 +272,7 @@ def sus_vec (v1, v2):
     for i in range (len (v1)):
         for j in range (len (v2)):
             if len (v1) != len (v2): print ('Esta resta no es posible por dimensiones de los vectores')
-            else: a = substraction (v1[i], v2[i])
+            else: a = subtraction (v1[i], v2[i])
         par.append (a)
     return (par)
 
@@ -303,12 +309,22 @@ def vec_equal (v1, v2):
                return True
           else: return False
 
+def prod_intern_vec (v1, v2):
+     if len (v1) != len (v2):
+          print ('Esta operacion no es posible por dimension de los vectores')
+     else:
+          prod = (0, 0)
+          conj = conjugate_vec (v1)
+          for i in range (len (v1)):
+               prod = addition (prod, product(conj[i], v2 [i]))
+          return prod
+        
 def distance_vec (v1, v2):
+     solve = ad_vec (v1, inv_vect (v2))
+     return module (prod_intern_vec (solve, solve))
+          
+def tensor (a):
      return
 
-
-
-def prod_intern_vec (v):
-     return
-
-
+#[[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]
+#[[(5,0),(2,-1),(6,-4)],[(0,0),(4,5),(2,0)],[(7,-4),(2,7),(0,0)]]
