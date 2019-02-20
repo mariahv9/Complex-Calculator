@@ -82,6 +82,97 @@ def inverse (c):
      return z
 
 '---------------------------------------o---------------------------------------'
+#operaciones vectores con complejos 
+def ad_vec (v1, v2):
+    '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)] +
+    v2 = [(c1, c2), (c1, c2),...,(c1, c2)] =
+    v = [(c1, c2), (c1, c2),...,(c1, c2)]'''
+    par = []
+    for i in range (len (v1)):
+        for j in range (len (v2)):
+            if len (v1) != len (v2): print ('Esta suma no es posible por dimensiones de los vectores')
+            else: a = addition (v1[i], v2[i])
+        par.append (a)
+    return (par)
+
+def prod_vec (c, v):
+    '''c = (a1, b1) x v = [(c1, c2), (c1, c2),...,(c1, c2)]
+    tuple x matrix ---> matrix'''
+    pr = []
+    for i in range (len (v)):
+        pr.append(product (c, v [i]))
+    return (pr)
+
+def sub_vec (v1, v2):
+    '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)] -
+    v2 = [(c1, c2), (c1, c2),...,(c1, c2)] =
+    v = [(c1, c2), (c1, c2),...,(c1, c2)]'''
+    par = []
+    for i in range (len (v1)):
+        for j in range (len (v2)):
+            if len (v1) != len (v2): print ('Esta resta no es posible por dimensiones de los vectores')
+            else: a = subtraction (v1[i], v2[i])
+        par.append (a)
+    return (par)
+
+def inv_vect (v):
+     '''v = [(c1, c2), (c1, c2),...,(c1, c2)]
+     vector ---> vector'''
+     inv = []
+     for i in range (len (v)):
+          inv.append (inverse (v[i]))
+     return inv
+
+def conjugate_vec (v):
+     '''v = [(c1, c2), (c1, c2),...,(c1, c2)]
+     vector ---> vector'''
+     con = []
+     for i in range (len (v)):
+          con.append (conjugate (v[i]))
+     return con
+
+def norm_vec (v):
+     '''v = [(c1, c2), (c1, c2),...,(c1, c2)]
+     vector ---> tuple'''
+     c = 0
+     for i in range (len (v)):
+          c += (module (v[i]))
+     return c
+
+def vec_equal (v1, v2):
+     '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)];
+     v2 = [(c1, c2), (c1, c2),...,(c1, c2)]
+     vector, vector ---> boolean'''
+     for i in range (len (v1)):
+          if v1[i] == v2[i]:
+               return True
+          else: return False
+
+def prod_intern_vec (v1, v2):
+     '''vector, vector ---> tuple'''
+     if len (v1) != len (v2):
+          print ('Esta operacion no es posible por dimension de los vectores')
+     else:
+          prod = (0, 0)
+          conj = conjugate_vec (v1)
+          for i in range (len (v1)):
+               prod = addition (prod, product(conj[i], v2 [i]))
+          return prod
+        
+def distance_vec (v1, v2):
+     '''vector, vector ---> real'''
+     solve = ad_vec (v1, inv_vect (v2))
+     return module (prod_intern_vec (solve, solve))
+          
+def tensor (v1, v2):
+     for i in range (len (v1)):
+          tensor = []
+          for j in range (len (v2)):
+               tensor.append (product (v1 [i], v2 [j]))
+          v1 [i] = tensor
+     return v1
+          
+'---------------------------------------o---------------------------------------'
 #operaciones matrices con complejos
 def ad_mat (m1, m2):
     '''m1 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] +
@@ -190,10 +281,12 @@ def m_trace (m):
      return (b)
 
 def m_prod_intern (m1, m2):
+     '''matrix, matrix ---> tuple'''
      m = m_product (m_adjoint (m1), m2)
      return m_trace (m)
 
 def action_mat_vec (m, v):
+     '''matrix, vector ---> tuple'''
      if len (m[0]) != len (v):
           print ('No es posible hacer la accion por las dimensiones vector-matriz')
      else:
@@ -202,18 +295,12 @@ def action_mat_vec (m, v):
                for j in range (len (m[0])):
                     ac = addition (ac, product (m[i][j], v[j]))
           return ac
-     
-##
-def m_equal (m1, m2):
-     '''m1 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
-     m2 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
-     matrix, matrix ---> boolean'''
-     if len (m1) != len (m2) or len (m1[0]) != len (m2[0]):
-          return False
-     for i in range (len (m1)):
-          for j in range (len (m1[0])):return
-          
-##
+   
+def m_equal(m1, m2):
+     '''matrix, matrix ---> boolean'''
+     if m1 == m2 : return True
+     else: return False
+                 
 def m_hermitian (m):
      '''m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
      matrix ---> boolean'''
@@ -221,8 +308,6 @@ def m_hermitian (m):
           print ('Matriz no cuadrada')
      else:
           adj = m_adjoint (m)
-          print (adj)
-          print (m)
      return m_equal (adj, m)
 
 def m_identity (m):
@@ -242,89 +327,3 @@ def m_unitary (m):
           mat_adj = m_product (m, m_adjoint (m))
      return m_identity (mat_adj)
 
-'---------------------------------------o---------------------------------------'
-#operaciones vectores con complejos 
-def prod_vec (c, v):
-    '''c = (a1, b1) x v = [(c1, c2), (c1, c2),...,(c1, c2)]
-    tuple x matrix ---> matrix'''
-    pr = []
-    for i in range (len (v)):
-        pr.append(product (c, v [i]))
-    return (pr)
-
-def ad_vec (v1, v2):
-    '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)] +
-    v2 = [(c1, c2), (c1, c2),...,(c1, c2)] =
-    v = [(c1, c2), (c1, c2),...,(c1, c2)]'''
-    par = []
-    for i in range (len (v1)):
-        for j in range (len (v2)):
-            if len (v1) != len (v2): print ('Esta suma no es posible por dimensiones de los vectores')
-            else: a = addition (v1[i], v2[i])
-        par.append (a)
-    return (par)
-
-def sub_vec (v1, v2):
-    '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)] -
-    v2 = [(c1, c2), (c1, c2),...,(c1, c2)] =
-    v = [(c1, c2), (c1, c2),...,(c1, c2)]'''
-    par = []
-    for i in range (len (v1)):
-        for j in range (len (v2)):
-            if len (v1) != len (v2): print ('Esta resta no es posible por dimensiones de los vectores')
-            else: a = subtraction (v1[i], v2[i])
-        par.append (a)
-    return (par)
-
-def inv_vect (v):
-     '''v = [(c1, c2), (c1, c2),...,(c1, c2)]
-     vector ---> vector'''
-     inv = []
-     for i in range (len (v)):
-          inv.append (inverse (v[i]))
-     return inv
-
-def conjugate_vec (v):
-     '''v = [(c1, c2), (c1, c2),...,(c1, c2)]
-     vector ---> vector'''
-     con = []
-     for i in range (len (v)):
-          con.append (conjugate (v[i]))
-     return con
-
-def norm_vec (v):
-     '''v = [(c1, c2), (c1, c2),...,(c1, c2)]
-     vector ---> tuple'''
-     c = 0
-     for i in range (len (v)):
-          c += (module (v[i]))
-     return c
-
-def vec_equal (v1, v2):
-     '''v1 = [(c1, c2), (c1, c2),...,(c1, c2)];
-     v2 = [(c1, c2), (c1, c2),...,(c1, c2)]
-     vector, vector ---> boolean'''
-     for i in range (len (v1)):
-          if v1[i] == v2[i]:
-               return True
-          else: return False
-
-def prod_intern_vec (v1, v2):
-     if len (v1) != len (v2):
-          print ('Esta operacion no es posible por dimension de los vectores')
-     else:
-          prod = (0, 0)
-          conj = conjugate_vec (v1)
-          for i in range (len (v1)):
-               prod = addition (prod, product(conj[i], v2 [i]))
-          return prod
-        
-def distance_vec (v1, v2):
-     solve = ad_vec (v1, inv_vect (v2))
-     return module (prod_intern_vec (solve, solve))
-          
-def tensor (a):
-     return
-
-#[[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]
-#[[(5,0),(2,-1),(6,-4)],[(0,0),(4,5),(2,0)],[(7,-4),(2,7),(0,0)]]
