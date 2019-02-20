@@ -1,5 +1,6 @@
 from sys import stdin
 import math
+import unittest
 '---------------------------------------o---------------------------------------'
 #operaciones ecuaciones con complejos 
 def addition (c1, c2):
@@ -232,7 +233,8 @@ def m_escale (c, m):
     tuple, matrix ---> matrix'''
     pro = []
     for i in range (len (m)):
-         pro.append (product (m [i]), c)
+         for j in range (len (m[0])):
+              pro.append (product (m [i][j]), c)
     return pro
 
 def m_traspouse (m):
@@ -328,7 +330,7 @@ def m_unitary (m):
      return m_identity (mat_adj)
 
 '---------------------------------------o---------------------------------------'
-#pruebas
+#pruebas ecuaciones con complejos 
 class TestCases (unittest.TestCase):
      def test_addition (self):
           result = addition ((2, 5), (3, 3))
@@ -356,8 +358,89 @@ class TestCases (unittest.TestCase):
 
      def test_car_pol (self):
           result = car_pol ((2, 5))
-          self.assertEqual (result, (5.385164807134504, 1.1902899496825317))    
-          
-        
+          self.assertEqual (result, (5.385164807134504, 1.1902899496825317))
+
+     def test_pol_car (self):
+          result = pol_car ((2, 5))
+          self.assertEqual (result, (0.5673243709264525, -1.917848549326277))
+
+     def test_inverse (self):
+          result = inverse ((2, 5))
+          self.assertEqual (result, ((-2, -5)))
+
+#pruebas vectores con complejos 
+     def test_ad_vec (self):
+          result = ad_vec (([(3,2),(0,0),(5,-6)]), ([(1,0),(4,2),(0,1)]))
+          self.assertEqual (result, ([(4, 2), (4, 2), (5, -5)]))
+
+     def test_prod_vec (self):
+          result = prod_vec (((3,2)), ([(1,0),(4,2),(0,1)]))
+          self.assertEqual (result, ([(3, 2), (8, 14), (-2, 3)]))
+
+     def test_sub_vec (self):
+          result = sub_vec (([(3,2),(0,0),(5,-6)]), ([(1,0),(4,2),(0,1)]))
+          self.assertEqual (result, ([(2, 2), (-4, -2), (5, -7)]))
+
+     def test_inv_vect (self):
+          result = inv_vect (([(3,2),(0,0),(5,-6)]))
+          self.assertEqual (result, ([(-3, -2), (0, 0), (-5, 6)]))
+
+     def test_conjugate_vec (self):
+          result = conjugate_vec (([(3,2),(0,0),(5,-6)]))
+          self.assertEqual (result, ([(3, -2), (0, 0), (5, 6)]))
+
+     def test_norm_vec (self):
+          result = norm_vec (([(3,2),(0,0),(5,-6)]))
+          self.assertEqual (result, (11.415800951370644))
+
+     def test_vec_equal (self):
+          result = vec_equal (([(3,2),(0,0),(5,-6)]), ([(1,0),(4,2),(0,1)]))
+          self.assertEqual (result, (False))
+
+     def test_prod_intern_vec (self):
+          result = prod_intern_vec (([(3,2),(0,0),(5,-6)]), ([(1,0),(4,2),(0,1)]))
+          self.assertEqual (result, ((-3, 3)))
+
+     def test_distance_vec (self):
+          result = distance_vec (([(3,2),(0,0),(5,-6)]), ([(1,0),(4,2),(0,1)]))
+          self.assertEqual (result, (102.0))
+
+     def test_tensor (self):
+          result = tensor (([(3,2),(0,0),(5,-6)]), ([(1,0),(4,2),(0,1)]))
+          self.assertEqual (result, ([[(3, 2), (8, 14), (-2, 3)], [(0, 0), (0, 0), (0, 0)], [(5, -6), (32, -14), (6, 5)]]))    
+
+#pruebas matrices con complejos
+     def test_ad_mat (self):
+          result = ad_mat (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]), ([[(5,0),(2,-1),(6,-4)],[(0,0),(4,5),(2,0)],[(7,-4),(2,7),(0,0)]]))
+          self.assertEqual (result, [[(8, 2), (2, -1), (11, -10)], [(1, 0), (8, 7), (2, 1)], [(11, -5), (2, 7), (4, 0)]])
+
+     def test_m_subtraction (self):
+          result = m_subtraction (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]), ([[(5,0),(2,-1),(6,-4)],[(0,0),(4,5),(2,0)],[(7,-4),(2,7),(0,0)]]))
+          self.assertEqual (result, [[(-2, 2), (-2, 1), (-1, -2)], [(1, 0), (0, -3), (-2, 1)], [(-3, 3), (-2, -7), (4, 0)]])
+
+     def test_m_product (self):
+          result = m_product (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]), ([[(5,0),(2,-1),(6,-4)],[(0,0),(4,5),(2,0)],[(7,-4),(2,7),(0,0)]]))
+          self.assertEqual (result, [[(37, -13), (12, 3), (31, 9)], [(10, 0), (6, 28), (-6, 32)], [(50, -44), (3, 4), (4, -60)]])
+
+     def test_m_traspouse (self):
+          result = m_traspouse (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]))
+          self.assertEqual (result, [[(3, 2), (1, 0), (4, -1)], [(0, 0), (4, 2), (0, 0)], [(5, -6), (0, 1), (4, 0)]])
+
+     def test_m_conjugate (self):
+          result = m_conjugate (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]))
+          self.assertEqual (result, [[(3, -2), (0, 0), (5, 6)], [(1, 0), (4, -2), (0, -1)], [(4, 1), (0, 0), (4, 0)]])
+
+     def test_m_adjoint (self):
+          result = m_adjoint (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]))
+          self.assertEqual (result, [[(3, -2), (1, 0), (4, 1)], [(0, 0), (4, -2), (0, 0)], [(5, 6), (0, -1), (4, 0)]])
+
+     def test_m_inverse (self):
+          result = m_inverse (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]))
+          self.assertEqual (result, [[(3, -2), (0, 0), (5, 6)], [(1, 0), (4, -2), (0, -1)], [(4, 1), (0, 0), (4, 0)]])
+
+     def test_m_trace (self):
+          result = m_trace (([[(3,2),(0,0),(5,-6)],[(1,0),(4,2),(0,1)],[(4,-1),(0,0),(4,0)]]))
+          self.assertEqual (result, (11, 4))
+  
 if __name__ == '__main__':
     unittest.main()
