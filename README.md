@@ -32,7 +32,7 @@ SUBTRACTION: M1 - M2 = M1 [j, k] - M2 [j, k]
 PRODUCT: (M1 x M2)[j, k] = SUMATORY (h=0, n-1)(M1 [j, h] x B [h, k])
 SCALAR: C1 ∙ M = C ∙ M [j, k]
 TRASPOUSE: M^T [j, k] = M [k, j]
-CONJUGATE: M` [j,k] = M [j,k]
+CONJUGATE: M` [j,k] = M [-j,-k]
 ADJOINT: M† [j, k] = M [k, j]
 INVERSE: -M [i, j] = -(M [i, j])
 TRACE: Trace(M) = SUMATORY (n−1, i=0)(C[i, i ])
@@ -55,11 +55,11 @@ ADDITION: (V1 + V2) [i] = V1 [i] + V2 [i]
 SUBTRACTION: (V1 - V2) [i] = V1 [i] - V2 [i]
 PRODUCT: (C · V)[j] = C × V[j]
 INVERSE: (−V)[ j ] = −(V[ j ])
-CONJUGATE: 
-NORM: 
+CONJUGATE: V [i] = V [-i]
+NORM: |V| = sqrt (x2 +y2 +z2)
 EQUALS: V1 == V2
-DISTANCE: 
-INNER PRODUCT:
+DISTANCE: |V1 − V2| = sqrt⟨V1 − V2,V1 − V2⟩
+INNER PRODUCT: ⟨V1, V2⟩ = V† ⋆ V2
 ```
 
 ## Running the tests
