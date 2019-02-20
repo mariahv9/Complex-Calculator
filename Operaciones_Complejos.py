@@ -327,3 +327,37 @@ def m_unitary (m):
           mat_adj = m_product (m, m_adjoint (m))
      return m_identity (mat_adj)
 
+'---------------------------------------o---------------------------------------'
+#pruebas
+class TestCases (unittest.TestCase):
+     def test_addition (self):
+          result = addition ((2, 5), (3, 3))
+          self.assertEqual (result, (5, 8))
+
+     def test_product (self):
+          result = product ((2, 5), (3, 3))
+          self.assertEqual (result, (-9, 21))
+
+     def test_subtraction (self):
+          result = subtraction ((2, 5), (3, 3))
+          self.assertEqual (result, (-1, 2))
+
+     def test_division (self):
+          result = division ((2, 5), (3, 3))
+          self.assertEqual (result, (1.1666666666666667, 0.5))
+
+     def test_module (self):
+          result = module ((2, 5))
+          self.assertEqual (result, (5.385164807134504))
+
+     def test_conjugate (self):
+          result = conjugate ((2, 5))
+          self.assertEqual (result, ((2, -5)))
+
+     def test_car_pol (self):
+          result = car_pol ((2, 5))
+          self.assertEqual (result, (5.385164807134504, 1.1902899496825317))    
+          
+        
+if __name__ == '__main__':
+    unittest.main()
