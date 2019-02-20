@@ -1,10 +1,15 @@
 # Complex Calculator
 
-One Paragraph of project description goes here
+This project is about a complex operations of equations, matrix and vectors.
 
-## Getting Started
+### Begining
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Each function read tuples (a, b), this represents a as real part and b as imaginary part.
+
+## Equations with complex numbers
+
+The first part is composed for addition, subtraction, product, division, module, conjugate, conversion cartesian to polar and polar to cartesian.
+
 
 ### Prerequisites
 
