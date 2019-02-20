@@ -66,10 +66,14 @@ INNER PRODUCT: ⟨V1, V2⟩ = V† ⋆ V2
 
 pendienteee
 
-## Built With
+## References
 
-* Quantum Computer for Computer Scientist - (Noson S. Yanofsky, Mirco A. Mannucci)
+* Quantum Computer for Computer Scientist - (S. Yanofsky, N., & A. Mannucci, M. (2008). Quantum Computing for Computer Scientists. New York: Cambridge University Press.)
+
+## Reviewed
+Luis Daniel Benavides Navarro, Ph.D 
 
 ## Authors
 
 * **Maria Fernanda Hernandez Vargas** - [PurpleBooth](https://github.com/mariahv9)
+Student of Systems Engineering of Escuela Colombiana de Ingenieria Julio Garavito 
