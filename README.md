@@ -62,9 +62,17 @@ DISTANCE: |V1 − V2| = sqrt⟨V1 − V2,V1 − V2⟩
 INNER PRODUCT: ⟨V1, V2⟩ = V† ⋆ V2
 ```
 
+## Experiments
+
+This part you found experiments as:
+```
+The marbles experiments with complex coefficient
+Experiments of multiple probabilistic classic slits, with more than two slits.
+Experiment of multiple quantum slits.
+```
 ## Running the tests
 
-pendienteee
+There are proofs of the last codes. The function is verify with base cases.
 
 ## References
 
