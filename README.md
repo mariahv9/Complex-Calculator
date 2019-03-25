@@ -64,17 +64,20 @@ INNER PRODUCT: ⟨V1, V2⟩ = V† ⋆ V2
 
 ## Experiments
 
-This part you found experiments as:
-The marbles experiments with complex coefficient: We are concerned not only with the states of the system, but also with the way the states change. How they change – or the dynamics of the system – can be repre- sented by a graph with directed edges. We do not permit an arbitrary graph. Rather, we insist that every vertex in the graph has exactly one outgoing edge. This require- ment will coincide with our demand that the system be deterministic. In other words, each marble must move to exactly one place. In plain English, this states that the number of marbles that will reach vertex i after one time step is the sum of all the marbles that are on vertices with edges connecting to vertex i.
+#This part you found experiments as:
+###The marbles experiments with complex coefficient 
+We are concerned not only with the states of the system, but also with the way the states change. How they change – or the dynamics of the system – can be repre- sented by a graph with directed edges. We do not permit an arbitrary graph. Rather, we insist that every vertex in the graph has exactly one outgoing edge. This require- ment will coincide with our demand that the system be deterministic. In other words, each marble must move to exactly one place. In plain English, this states that the number of marbles that will reach vertex i after one time step is the sum of all the marbles that are on vertices with edges connecting to vertex i.
 Notice that the top two entries of Y are 0. This corresponds to the fact that there are no arrows going to vertex 0 or vertex 1.
 
-Experiments of multiple probabilistic classic slits, with more than two slits: In quantum mechanics, there is an inherent indeterminacy in our knowledge of a physical state. Furthermore, states change with probabilistic laws. This simply means that the laws governing a system’s evolution are given by describing how states tran- sition from one to another with a certain likelihood.
+###Experiments of multiple probabilistic classic slits, with more than two slits
+In quantum mechanics, there is an inherent indeterminacy in our knowledge of a physical state. Furthermore, states change with probabilistic laws. This simply means that the laws governing a system’s evolution are given by describing how states tran- sition from one to another with a certain likelihood.
 In order to capture these probabilistic scenarios, let us modify what we did in
 the last section. Instead of dealing with a bunch of marbles moving about, we shall
 work with a single marble. The state of the system will tell us the probabilities of the
 marble being on each vertex. We must modify the dynamics as well. Rather than exactly one arrow leaving each vertex, we will have several arrows shooting out of each vertex with real num- bers between 0 and 1 as weights. These weights describe the probability of our marble moving from one vertex to another in one time click. The adjacency matrices for our graphs will have real entries between 0 and 1 where the sums of the rows and the sums of the columns are all 1. Such matrices are called doubly stochastic.
 
-Experiment of multiple quantum slits: This matrix is not unitary. The reason this matrix fails to be unitary is that we have not placed all the arrows in our graph. There are many more possible ways the pho- ton can travel in a real-life physical situation. In particular, the photon might travel from right to left. The diagram and matrix would become too complicated if we put in all the transitions. We are simply trying to demonstrate the phenomenon of interference and we can accomplish that even with a matrix that is not quite unitary. The adjacency matrix, P (for “photons”).
+###Experiment of multiple quantum slits
+This matrix is not unitary. The reason this matrix fails to be unitary is that we have not placed all the arrows in our graph. There are many more possible ways the pho- ton can travel in a real-life physical situation. In particular, the photon might travel from right to left. The diagram and matrix would become too complicated if we put in all the transitions. We are simply trying to demonstrate the phenomenon of interference and we can accomplish that even with a matrix that is not quite unitary. The adjacency matrix, P (for “photons”).
 
 ## Running the tests
 
