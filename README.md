@@ -79,6 +79,9 @@ marble being on each vertex. We must modify the dynamics as well. Rather than ex
 #### Experiment of multiple quantum slits
 This matrix is not unitary. The reason this matrix fails to be unitary is that we have not placed all the arrows in our graph. There are many more possible ways the pho- ton can travel in a real-life physical situation. In particular, the photon might travel from right to left. The diagram and matrix would become too complicated if we put in all the transitions. We are simply trying to demonstrate the phenomenon of interference and we can accomplish that even with a matrix that is not quite unitary. The adjacency matrix, P (for “photons”).
 
+#### Probability ket
+We say that the state |ψ⟩ is a superposition of the basic states. |ψ⟩ represents the particle as being simultaneously in all {x0, x1, . . . , xn−1} locations, or a blending of all the |xi ⟩. There are, however, different possible blendings (much like in the recipe for baking an apple pie you can vary the proportions of the ingredients and obtain different flavors). The complex numbers c0,c1,...,cn−1 tell us precisely which su- perposition our particle is currently in. The norm square of the complex number ci divided by the norm squared of |ψ⟩ will tell us the probability that, after observing the particle, we will detect it at the point xi. Let us assume that the particle can only be at the four points {x0, x1, x2, x3}. Thus, we are concerned with the state space C4. We shall calculate the probability that our particle can be found at position x2.  
+
 ## Running the tests
 
 There are proofs of the last codes. The function is verify with base cases.
