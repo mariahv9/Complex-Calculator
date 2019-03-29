@@ -82,6 +82,17 @@ This matrix is not unitary. The reason this matrix fails to be unitary is that w
 #### Probability ket
 We say that the state |ψ⟩ is a superposition of the basic states. |ψ⟩ represents the particle as being simultaneously in all {x0, x1, . . . , xn−1} locations, or a blending of all the |xi ⟩. There are, however, different possible blendings (much like in the recipe for baking an apple pie you can vary the proportions of the ingredients and obtain different flavors). The complex numbers c0,c1,...,cn−1 tell us precisely which su- perposition our particle is currently in. The norm square of the complex number ci divided by the norm squared of |ψ⟩ will tell us the probability that, after observing the particle, we will detect it at the point xi. Let us assume that the particle can only be at the four points {x0, x1, x2, x3}. Thus, we are concerned with the state space C4. We shall calculate the probability that our particle can be found at position x2.  
 
+#### Amplitude ket
+The transition amplitude between two states may be zero. In fact, that hap- pens precisely when the two states are orthogonal to one another. This simple fact hints at the physical content of orthogonality: orthogonal states are as far apart as they can possibly be. We can think of them as mutually exclusive alternatives: for instance, an electron can be in an arbitrary superposition of spin up and down, but after we measure it in the z direction, it will always be either up or down, never both up and down. If our electron was already in the up state before the z di- rection measurement, it will never transition to the down state as a result of the measurement.
+
+#### Average value
+If the commutator of two hermitian operators is zero, or equivalently, the two operators commute, there is no difficulty in assigning their product (in whatever order) as the mathematical equivalent of the physical product of their associated observables. But what about the other cases, when the two operators do not com- mute? The Heisenberg’s uncertainty principle, which we are going to meet at the end of this section, will provide an answer.
+There is yet another aspect of the association between observables and hermitian operators that can provide substantial physical insight: we know from Chapter 2 that hermitian operators are precisely those operators that behave well with respect to the inner product.
+
+#### Variance
+We are now able to see that if both λ1 and λ2 are very close to μ, the term in the equation will be close to zero. Conversely, if either of the two eigenvalues is far from μ (it is immaterial whether above or below it, because we are taking squares), the variance will be a big real number. Conclusion: the variance does indeed inform us about the spread of the eigenvalues around their mean.  
+Our reader may still be a bit unsatisfied after this example: after all, what it shows is that the definition of variance given above works as it should in the case of diagonal matrices. Actually, it is a known fact that all hermitian matrices can be di- agonalized by switching to a basis of eigenvectors, so the example is comprehensive enough to legitimize our definition.
+
 ## Running the tests
 
 There are proofs of the last codes. The function is verify with base cases.
