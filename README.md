@@ -93,6 +93,9 @@ There is yet another aspect of the association between observables and hermitian
 We are now able to see that if both λ1 and λ2 are very close to μ, the term in the equation will be close to zero. Conversely, if either of the two eigenvalues is far from μ (it is immaterial whether above or below it, because we are taking squares), the variance will be a big real number. Conclusion: the variance does indeed inform us about the spread of the eigenvalues around their mean.  
 Our reader may still be a bit unsatisfied after this example: after all, what it shows is that the definition of variance given above works as it should in the case of diagonal matrices. Actually, it is a known fact that all hermitian matrices can be di- agonalized by switching to a basis of eigenvectors, so the example is comprehensive enough to legitimize our definition.
 
+#### Eigenstates
+What is the probability that a normalized start state |ψ⟩ will transition to a spe- cific eigenvector, say, |e⟩? We must go back to what we said in Section 4.1: the prob- ability of the transition to the eigenvector is given by the square of the inner product of the two states: |⟨e|ψ⟩|2. This expression has a simple meaning: it is the projection of |ψ⟩ along |e⟩.
+
 ## Running the tests
 
 There are proofs of the last codes. The function is verify with base cases.
