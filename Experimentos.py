@@ -1,6 +1,7 @@
 from sys import stdin
 import math
 import unittest
+from numpy import linalg as operation
 '---------------------------------------o---------------------------------------'
 #ase operations
 def addition (c1, c2):
@@ -167,6 +168,11 @@ def m_subtraction (m1, m2):
         su.append (par)
     return (su)
 
+def module(c):
+    '''|c| = |a + bi| -------> ((a)**2+(b)**2)**0.5'''
+    a, b = c[0],c[1]
+    return ((a)**2+(b)**2)**0.5
+
 '---------------------------------------o---------------------------------------'
 #operations cap3
 def canics (m, v, N):
@@ -246,21 +252,85 @@ def variance (m, k):
           mat = m_escale ((average_value (k, m)), (m_identity (n)))
           u = m_subtraction (m,  mat)
           sol = m_product (u, u)
-     return sol
+          res = 0
+          for i in range (len (k)):
+               a = module (k [i])**2
+               res += a * sol [i][i][0]
+     return res
 
-def eigenstates(ob, v):
-    ob1 = []
-    for i in range(len(ob)):
-        ob1.append ([])
-        for j in range (len (ob [0])):
-            ob1[i].append(ob [i][j])
-    for i in range(len (ob1)):
-        for j in range(len (ob1[0])):
-            ob1[i][j] = egval (ob1 [i][j])
-    N = list (LA.eig (ob1) [0])
-    y = variance (ob, v) 
-    return N, y
+def eigen_values(observable):
+    aux = []
+    for i in range(len(observable)):
+        z = []
+        for j in range(len(observable[0])):
+            a = observable[i][j][0]
+            b = observable[i][j][1]
+            b = eval(str(b)+'j')
+            z.append(a+b)
+        aux.append(z)
+    valores,vectores = operation.eigh(aux)
+    rta = []
+    for i in valores:
+        rta.append(i)
+    return rta
 
+def eigen_vectors(observable):
+    aux = []
+    for i in range(len(observable)):
+        z = []
+        for j in range(len(observable[0])):
+            a = observable[i][j][0]
+            b = observable[i][j][1]
+            b = eval(str(b)+'j')
+            z.append(a+b)
+        aux.append(z)
+    valores,vectores = operation.eigh(aux)
+    rta = []
+    for i in vectores:
+        w = []
+        for j in i:
+            aux = str(j)
+            b = aux.index('j')
+            a = b
+            for i in range(len(aux)):
+                if aux[::-1][i] == '-' or aux[::-1][i] == '+':
+                    a = i
+                    break
+            try:
+                a = len(aux)-a
+                tupla = (float(aux[1:a-1]),float(aux[a:b]))
+                w.append(tupla)
+            except ValueError:
+                tupla = (0,float(aux[:b]))
+                w.append(tupla)
+        rta.append(w)
+    return rta
+
+def transitor_probability(observable,estado):
+    propios = eigen_vectors(observable)
+    valores = eigen_values(observable)
+    aux = []
+    for i in range(len(estado)):
+        aux.append([estado[i]])
+    au = m_product (observable,aux)
+    aux = []
+    for i in au:
+        for j in i:
+            aux.append(j)
+    pn = []
+    for i in aux:
+        pn.append(module (i)**2)
+    ans = 0
+    for i in range(len(valores)):
+        ans += valores[i]*pn[i]
+    return ans
+
+def system_dynamic(n,M,estado):
+    estado = [estado]
+    for i in range(n):
+        estado = m_product(estado,M)
+    return estado[0]
+       
 '---------------------------------------o---------------------------------------'
 #test experiments
 class TestCases (unittest.TestCase):
@@ -290,7 +360,15 @@ class TestCases (unittest.TestCase):
 
      def test_variance (self):
           result = variance ([[(1, 0), (0, -1)], [(0, 1), (2, 0)]], [((2**0.5) / 2, 0), (0, (2**0.5) / 2)])
-          self.assertEqual (result, [[(3.2500000000000013, 0.0), (0.0, 2.000000000000001)], [(0.0, -2.000000000000001), (1.2500000000000004, 0.0)]]) 
+          self.assertEqual (result, 2.2500000000000013)
+
+     def test_transitor_probability(self):
+          result = transitor_probability ([[(-1,0),(0,-1)],[(0,1),(1,0)]], [(1/2,0),(1/2,0)]) 
+          self.assertEqual (result, 0)
+          
+     def test_system_dynamic (self):
+          result = system_dynamic (4, [[(0,0),(1/(2)**0.5,0),(1/(2)**0.5,0),(0,0)],[(0,1/(2)**0.5),(0,0),(0,0),(1/(2)**0.5,0)],[(1/(2)**0.5,0),(0,0),(0,0),(0,1/(2)**0.5)],[(0,0),(1/(2)**0.5,0),(-1/(2)**0.5,0),(0,0)]], [(1,0),(0,0),(0,0),(0,0)])
+          self.assertEqual (result, [(-0.49999999999999983, 0.49999999999999983), (0.0, 0.0), (0.0, 0.0), (0.49999999999999983, 0.49999999999999983)])
           
 if __name__ == '__main__':
     unittest.main()
