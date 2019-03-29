@@ -23,6 +23,16 @@ def product (c1, c2):
      z = (x, y)
      return z
 
+def subtraction (c1, c2):
+     '''c1 - c2 ---> z
+     subtraction of tuples ---> tuple'''
+     a1 = c1 [0]; a2 = c2 [0]
+     b1 = c1 [1]; b2 = c2 [1]
+     x = a1 - a2
+     y = b1 - b2
+     z = (x, y)
+     return z
+
 def m_product (A, B):
     filasB = len(B)
     columnasA = len(A[0])
@@ -73,6 +83,90 @@ def conjugate_vec (v):
           con.append (conjugate (v[i]))
      return con
 
+def prod_intern_vec (v1, v2):
+     '''vector, vector ---> tuple'''
+     if len (v1) != len (v2):
+          print ('Esta operacion no es posible por dimension de los vectores')
+     else:
+          prod = (0, 0)
+          for i in range (len (v1)):
+               prod = addition (prod, product(v1[i], v2 [i]))
+          return prod
+
+def prod_vec (c, v):
+    '''c = (a1, b1) x v = [(c1, c2), (c1, c2),...,(c1, c2)]
+    tuple x matrix ---> matrix'''
+    pr = []
+    for i in range (len (v)):
+        pr.append(product (c, v [i]))
+    return (pr)
+
+def m_hermitian (m):
+     '''m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
+     matrix ---> boolean'''
+     if len (m) != len (m[0]):
+          print ('Matriz no cuadrada')
+     else:
+          adj = m_adjoint (m)
+     return m_equal (adj, m)
+
+def m_conjugate (m):
+     '''m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
+     matrix ---> matrix'''
+     mat = []
+     for i in range (len (m)):
+          line = []
+          for j in range (len (m [0])):
+               line.append (conjugate (m[i][j]))
+          mat.append (line)
+     return mat
+
+def m_identity (n):
+     m = [[(0, 0) for i in range (n)]for j in range (n)]
+     for i in range (n):
+          m [i][i] = (1, 0)
+     return m
+
+def m_adjoint (m):
+     '''m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
+     matrix ---> matrix'''
+     return m_conjugate (m_traspouse (m))
+
+def m_equal(m1, m2):
+     '''matrix, matrix ---> boolean'''
+     if m1 == m2 : return True
+     else: return False
+
+def m_escale (c, m):
+    '''c = (a, b) x
+    m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
+    M = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
+    tuple, matrix ---> matrix'''
+    pro = []
+    for i in range (len (m)):
+         a = []
+         for j in range (len (m[0])):
+              a.append (product (m [i][j], c))
+         pro.append(a)
+    return pro
+
+def m_subtraction (m1, m2):
+    '''m1 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] -
+    m2 = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]] =
+    SM = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]]
+    matrix, matrix ---> matrix'''
+    su = []
+    for i in range (len (m1)):
+        par = []
+        for j in range (len(m2)):
+            if len (m1 [i]) != len (m2 [i]):
+                print ('Esta resta no es posible por dimensiones de las matrices')
+            else:
+                a = subtraction (m1 [i][j], m2 [i][j])
+                par.append (a)
+        su.append (par)
+    return (su)
+
 '---------------------------------------o---------------------------------------'
 #operations cap3
 def canics (m, v, N):
@@ -117,17 +211,55 @@ def count_bullets (m, N):
     return n
 
 def probability_ket (h, ket):
-     '''h = indice, vet = vector (vet)'''
+     '''h = indice, ket = vector (ket)'''
      result = norm_vec (ket)
      r = abs (sum (product (ket[h], ket [h])))
      ans = r / (result ** 2)
      return ans 
 
-def distance_ket (k1, k2):
+def amplitude_ket (n1, n2, k1, k2):
      '''k1, k2 ---> vector'''
-     bra = conjugate_vec (k2)
-     result = m_product (bra, k1)
-     return result
+     k3 = conjugate_vec (k2)
+     r1 = prod_vec (n1, k1)
+     r2 = prod_vec (n2, k3)
+     return prod_intern_vec (r1, r2)
+
+def average_value (ket, m):
+     kat = []
+     for i in range (len (ket)):
+          kat.append([ket [i]])
+     r = m_product (m, kat)
+     r = m_conjugate (r)
+     y = []
+     l = []
+     for i in r:
+          for j in i:
+               y.append (j)
+     return prod_intern_vec (y, ket)
+
+def variance (m, k):
+     '''m = [[(c1, c2)], [(c1, c2)],...,[(c1, c2)]],
+     ket = vector (ket),
+     m, k ---> tuple'''
+     if m_hermitian (m):
+          n = len (m)
+          mat = m_escale ((average_value (k, m)), (m_identity (n)))
+          u = m_subtraction (m,  mat)
+          sol = m_product (u, u)
+     return sol
+
+def eigenstates(ob, v):
+    ob1 = []
+    for i in range(len(ob)):
+        ob1.append ([])
+        for j in range (len (ob [0])):
+            ob1[i].append(ob [i][j])
+    for i in range(len (ob1)):
+        for j in range(len (ob1[0])):
+            ob1[i][j] = egval (ob1 [i][j])
+    N = list (LA.eig (ob1) [0])
+    y = variance (ob, v) 
+    return N, y
 
 '---------------------------------------o---------------------------------------'
 #test experiments
@@ -143,9 +275,22 @@ class TestCases (unittest.TestCase):
      def test_count_bullets (self):
           result = count_bullets ([[(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)],[(1/(2)**(1/2), 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)],[(1/(2)**(1/2), 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (0, 0)],[(0, 0), (-1/(6)**(1/2), 1/(6)**(1/2)), (0, 0), (1, 0), (0, 0), (0, 0), (0, 0), (0, 0)],[(0, 0), (-1/(6)**(1/2), -1/(6)**(1/2)), (0, 0), (0, 0), (1, 0), (0, 0), (0, 0), (0, 0)],[(0, 0), (1/(6)**(1/2), -1/(6)**(1/2)), (-1/(6)**(1/2), 1/(6)**(1/2)), (0, 0), (0, 0), (1, 0), (0, 0), (0, 0)],[(0, 0), (0, 0), (-1/(6)**(1/2), -1/(6)**(1/2)), (0, 0), (0, 0), (0, 0), (1, 0), (0, 0)],[(0, 0), (0, 0), (1/(6)**(1/2), -1/(6)**(1/2)), (0, 0), (0, 0), (0, 0), (0, 0), (1, 0)]], 1)
           self.assertEqual (result, [[0, 0, 0, 0, 0, 0, 0, 0], [0.4999999999999999, 0, 0, 0, 0, 0, 0, 0], [0.4999999999999999, 0, 0, 0, 0, 0, 0, 0], [0, 0.3333333333333334, 0, 1, 0, 0, 0, 0], [0, 0.3333333333333334, 0, 0, 1, 0, 0, 0], [0, 0.3333333333333334, 0.3333333333333334, 0, 0, 1, 0, 0], [0, 0, 0.3333333333333334, 0, 0, 0, 1, 0], [0, 0, 0.3333333333333334, 0, 0, 0, 0, 1]])
+          
      def test_probability_ket (self):
           result = probability_ket (2, [(-3, -1), (0, -2), (0, 1), (2, 0)])
           self.assertEqual (result, 0.05263157894736841)
+
+     def test_amplitude_ket (self):
+          result = amplitude_ket (((2**0.5) / 2, 0), ((2**0.5) / 2, 0), [(1, 0), (0, 1)], [(0, 1), (-1, 0)])
+          self.assertEqual (result, (0.0, -1.0000000000000002))
+
+     def test_average_value (self):
+          result = average_value ([((2**0.5) / 2, 0), (0, (2**0.5) / 2)], [[(1, 0), (0, -1)], [(0, 1), (2, 0)]])
+          self.assertEqual (result, (2.5000000000000004, 0.0))
+
+     def test_variance (self):
+          result = variance ([[(1, 0), (0, -1)], [(0, 1), (2, 0)]], [((2**0.5) / 2, 0), (0, (2**0.5) / 2)])
+          self.assertEqual (result, [[(3.2500000000000013, 0.0), (0.0, 2.000000000000001)], [(0.0, -2.000000000000001), (1.2500000000000004, 0.0)]]) 
           
 if __name__ == '__main__':
     unittest.main()
